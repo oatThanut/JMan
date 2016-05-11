@@ -31,16 +31,26 @@ public class JMan extends Piece {
      This method is not used. */
     public void act(){return;}
     
+    /**
+     * This method is used to check that piece are eatable or not
+     * @param p is the piece on the board
+     * @return if jMan can eat return true
+     */
     public boolean isEatable(Piece p){
     	if(p != null){
-    	boolean capturable = (getColorWord().equals("Green") && p.getColorWord().equals("Red") || getColorWord().equals("Red") && p.getColorWord().equals("Yellow") || getColorWord().equals("Yellow") && p.getColorWord().equals("Green"));
-			if (capturable)
-			setColor(p.getColor());
-//			if (p.getColorWord().equals("Red")) setColor(Color.RED);
-//			else if (p.getColorWord().equals("Yellow")) setColor(Color.YELLOW);
-//			else if (p.getColorWord().equals("Green")) setColor(Color.GREEN);
-    	
-			return capturable;
+    		boolean eating;
+    		if(getColorWord().equals("Green") && p.getColorWord().equals("Red")){
+    			eating = true;
+    		}else if(getColorWord().equals("Red") && p.getColorWord().equals("Yellow")){
+    			eating = true;
+    		}else if(getColorWord().equals("Yellow") && p.getColorWord().equals("Green")){
+    			eating = true;
+    		}else{
+    			eating = false;
+    		}
+			if (eating)
+			setColor(p.getColor());    	
+			return eating;
     	}
     	return false;
     }
@@ -49,7 +59,6 @@ public class JMan extends Piece {
     /** Move J*Man one step based on the value of i:
         0 = up, 1 = down, 2 = left, 3 = right. */
     public void step(int i) {
-    	System.out.println("<<<<test");
 		if (i == 0 && (getMap().isEmpty(getX(), getY()-1) || isEatable(getMap().pieceAt(getX(), getY() - 1)))){
 			getMap().move(getX(), getY(), getX(), getY() - 1);
 		}
@@ -64,6 +73,12 @@ public class JMan extends Piece {
 		}
 	}
     
+    /**
+     * This is the method that draw the element in field.
+     * @param g is the graphic on the field
+     * @param height height of grid
+     * @param width width of grid
+     */
     public void painting(Graphics g, int i, int j){
     	int h = i * this.getMap().getWidthOfTile();
 		int h1 = (i + 1) * this.getMap().getWidthOfTile();

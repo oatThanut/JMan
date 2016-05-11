@@ -159,10 +159,12 @@ public class Map implements ActionListener{
      if the new piece is J*Man, store it in field jMan.
      Precondition: typ is one of the piece constants in class Piece.*/
     public void putNew(int typ, int x, int y){
+    	
         if(typ == Piece.BLOCK){
         	this.grid[x][y] = new Block(x, y, this);
         }else if(typ == Piece.JMAN){
-        	this.grid[x][y] = new JMan(x, y, Piece.rand(0, 2), this);
+        	jMan = new JMan(x, y, Piece.rand(0, 2), this);
+        	this.grid[x][y] = jMan;
         }else if(typ == Piece.PILLAR){
         	this.grid[x][y] = new Pillar(x, y, Piece.rand(0, 2), this);
         }else if(typ == Piece.WALKER){
@@ -282,41 +284,9 @@ public class Map implements ActionListener{
             
             for (int i= 0; i < m.width; i= i+1){
                 for (int j= 0; j < m.height; j= j+1){
-                	
-                	
                 	if (m.grid[i][j] != null){
                 		m.grid[i][j].painting(g, i, j);
                 	}
-//                    int h= i * m.tileWidth;
-//                    int h1= (i+1) * m.tileWidth;
-//                    int v= j * m.tileHeight;
-//                    int v1= (j+1) * m.tileHeight;
-//                    
-//                    // Paint tile (i, j). It is in pixels (h..h1-1, v..v1-1).
-//                    if (m.grid[i][j] != null && m.grid[i][j].getType() == Piece.BLOCK){
-//                        // Tile is a block; fill it with a white square.
-//                        g.setColor(Color.WHITE);
-//                        g.fillRect(h+1, v, m.tileWidth-2, m.tileHeight-2);
-//                        
-//                    } else if (m.grid[i][j] != null && m.grid[i][j].getType() == Piece.JMAN){
-//                        // Fill J*Man's square with J*Man's Asterix Icon.
-//                        g.setColor(jMan.getColor());
-//                        g.drawLine(h+3, v+2, h1-3, v1-2);
-//                        g.drawLine(h+3, v1-2, h1-3, v+2);
-//                        g.drawLine(h+1, v+m.tileHeight/2, h1-1, v+m.tileHeight/2);
-//                        g.drawLine(h+m.tileWidth/2, v+1, h+m.tileWidth/2, v1-1);
-//                        
-//                    } else if (m.grid[i][j] != null && m.grid[i][j].getType() == Piece.WALKER){
-//                        //Tile is a walker, fill it with an appropriate colored circle.
-//                        g.setColor(m.grid[i][j].getColor()); 
-//                        g.fillOval(h+1, v, m.tileWidth-2, m.tileHeight-2);
-//                        
-//                    } else if (m.grid[i][j] != null && m.grid[i][j].getType() == Piece.PILLAR){
-//                        // Tile is a pillar, fill it with an appropriate colored triangle.
-//                        g.setColor(m.grid[i][j].getColor());
-//                        g.fillPolygon(new int[]{h+1, h1-1, h+m.tileWidth/2},
-//                                      new int[]{v1-2, v1-2, v}, 3);
-//                    }
                 }
             }//end of for loops
         }

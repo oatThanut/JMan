@@ -88,6 +88,12 @@ public abstract class Piece{
         this.act = acted;
     }
     
+    /**
+     * This is the method that draw the element in field.
+     * @param g is the graphic on the field
+     * @param height height of grid
+     * @param width width of grid
+     */
     public abstract void painting(Graphics g, int height, int width);
     
     /** Make this piece take one action. What a piece does on
